@@ -1,7 +1,9 @@
+import { Cover } from "./Page/Cover/Cover";
+
 function App() {
   return (
     <>
-     Notion Clone
+     <Cover />
     </>
   )
 }
