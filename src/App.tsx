@@ -1,10 +1,8 @@
-import { Cover } from "./Page/Cover/Cover";
+import { Page } from "./Page/Page";
 
 function App() {
   return (
-    <>
-     <Cover />
-    </>
+    <Page />
   )
 }
 
