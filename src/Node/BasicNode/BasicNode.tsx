@@ -1,8 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { nanoid } from "nanoid";
-import type { NodeData } from "../../utils/types";
+import type { NodeData, NodeType } from "../../utils/types";
 import { useRef, useEffect, type FormEventHandler, type KeyboardEventHandler } from "react";
 import { useAppState } from "../../state/AppStateContext";
+import { CommandPanel } from "../CommandPanel/CommandPanel";
+
+import cx from "classnames";
+import styles from "./../Node.module.css";
 
 type BasicNodeProps = {
     node: NodeData;
@@ -17,8 +21,10 @@ export const BasicNode = ({
     isFocused,
     index,
 }: BasicNodeProps) => {
-    const { changeNodeValue, addNode, removeNodeByIndex } = useAppState();
-    
+    const { changeNodeValue, addNode, removeNodeByIndex, changeNodeType } = useAppState();
+
+    const showCommandPanel = node?.value?.match(/^\//) && isFocused;
+
     const nodeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -72,14 +78,34 @@ export const BasicNode = ({
         }
     };
 
+    const parseCommand = (nodeType: NodeType) => {
+        if (nodeRef.current) {
+            changeNodeType(index, nodeType);
+            nodeRef.current.textContent = "";
+        }
+        
+    }
+
     return (
-        <div
-            ref={nodeRef}
-            onInput={handleInput}
-            contentEditable
-            suppressContentEditableWarning
-            onClick={handleClick}
-            onKeyDown={onKeyDown}
-        />
+        <>
+        {
+            showCommandPanel && (
+                <CommandPanel
+                    nodeText={node.value}
+                    selectItem={parseCommand}
+                />
+            )
+        }
+            <div
+                ref={nodeRef}
+                onInput={handleInput}
+                contentEditable
+                suppressContentEditableWarning
+                onClick={handleClick}
+                onKeyDown={onKeyDown}
+                className={cx(styles.node, styles[node.type])}
+            />
+        </>
+        
     );
 };

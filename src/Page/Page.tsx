@@ -2,9 +2,9 @@ import { useFocusedNodeIndex } from "./hooks/useFocusedNodeIndex";
 import { Cover } from "./Cover/Cover";
 import { Spacer } from "./Spacer/Spacer";
 import { Title } from "./Title/Title";
-import { BasicNode } from "../Node/BasicNode/BasicNode";
 import { nanoid } from "nanoid";
 import { useAppState } from "../state/AppStateContext";
+import { NodeTypeSwitcher } from "../Node/NodeTypeSwitcher/NodeTypeSwitcher";
 
 export const Page = () => {
     const { addNode, nodes, title, setTitle } = useAppState();
@@ -19,7 +19,7 @@ export const Page = () => {
                 <Title title={title} changePageTitle={setTitle} addNode={addNode} />
                 {
                     nodes.map((node, index) => (
-                        <BasicNode
+                        <NodeTypeSwitcher
                             key={node.id}
                             node={node}
                             index={index}

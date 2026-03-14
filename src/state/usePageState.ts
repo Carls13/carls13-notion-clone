@@ -5,11 +5,15 @@ export const usePageState = (initialState: Page) => {
     const [page, setPage] = useImmer<Page>(initialState);
 
     const addNode = (node: NodeData, index: number) => {
-        setPage((draft) => draft.nodes.splice(index, 0, node));
+        setPage((draft) => {
+            draft.nodes.splice(index, 0, node)
+        });
     };
 
     const removeNodeByIndex = (index: number) => {
-        setPage((draft) => draft.nodes.splice(index, 1));
+        setPage((draft) => {
+            draft.nodes.splice(index, 1)
+        });
     };
 
     const changeNodeValue = (index: number, value: string) => {
