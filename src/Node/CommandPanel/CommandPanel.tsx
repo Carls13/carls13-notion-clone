@@ -38,6 +38,10 @@ const supportedNodeTypes: SupportedNodeType[] = [
     {
         value: "page",
         name: "Page",
+    },
+    {
+        value: "image",
+        name: "Image",
     }
 ];
 

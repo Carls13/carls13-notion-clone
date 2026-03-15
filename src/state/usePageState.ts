@@ -60,9 +60,9 @@ export const usePageState = (initialState: Page) => {
     };
 
     return { 
-        nodes: page.nodes,
-        title: page.title, 
-        cover: page.cover,
+        nodes: page?.nodes,
+        title: page?.title, 
+        cover: page?.cover,
         addNode, 
         removeNodeByIndex, 
         changeNodeValue, 

@@ -9,7 +9,7 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { NodeContainer } from "../Node/NodeContainer/NodeContainer";
 
 export const Page = () => {
-    const { addNode, nodes, title, setTitle, reorderNodes } = useAppState();
+    const { addNode, nodes, title, setTitle, reorderNodes, cover, setCoverImage } = useAppState();
     const [focusedNodeIndex, setFocusedNodeIndex] = useFocusedNodeIndex({
         nodes
     });
@@ -24,13 +24,13 @@ export const Page = () => {
 
     return (
         <>
-            <Cover/>
+            <Cover filePath={cover} changePageCover={setCoverImage} />
             <div>
                 <Title title={title} changePageTitle={setTitle} addNode={addNode} />
                 <DndContext onDragEnd={handleDragEvent}>
                     <SortableContext strategy={verticalListSortingStrategy} items={nodes}>
                         {
-                            nodes.map((node, index) => (
+                            nodes?.map((node, index) => (
                                 <NodeContainer
                                     key={node.id}
                                     node={node}
@@ -43,8 +43,8 @@ export const Page = () => {
                     </SortableContext>
                     <DragOverlay />
                 </DndContext>
-               <Spacer showHint={!nodes.length} handleClick={() => {
-                    addNode({ type: "text", value: "", id: nanoid() }, nodes.length);
+               <Spacer showHint={!nodes?.length} handleClick={() => {
+                    addNode({ type: "text", value: "", id: nanoid() }, nodes?.length);
                }} />
             </div>
         </>

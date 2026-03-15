@@ -3,7 +3,7 @@ import { useMatch } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabaseClient";
 import startPageScaffold from "./startPageScaffold.json";
-import styles from "../utils.module.css";
+import styles from "../utils/utils.module.css";
 import { Loader } from "../components/Loader/Loader";
 
 type InjectedProps = {
@@ -31,8 +31,7 @@ export function withInitialState<TProps>(
         return
       }
       setIsLoading(true);
-      inProgress.current = true;
-
+      inProgress.current = true
       const fetchInitialState = async () => {
         try {
           const { data: userData } = await supabase.auth.getUser();
@@ -78,7 +77,6 @@ export function withInitialState<TProps>(
         inProgress.current = false;
         setIsLoading(false);
       };
-      
       fetchInitialState();
     }, [pageSlug]);
 
