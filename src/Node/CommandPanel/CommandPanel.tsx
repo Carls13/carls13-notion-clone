@@ -35,6 +35,10 @@ const supportedNodeTypes: SupportedNodeType[] = [
         value: "heading3",
         name: "Heading 3",
     },
+    {
+        value: "page",
+        name: "Page",
+    }
 ];
 
 export const CommandPanel = ({ nodeText, selectItem }: CommandPanelProps) => {
